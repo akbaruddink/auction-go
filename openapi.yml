@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: Auction
+  description: API collection for third-party integration
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /items:
+    post:
+      summary: Create Item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+              required:
+                - name
+                - description
+      responses:
+        '201':
+          description: Item created
+    get:
+      summary: Get Items
+      responses:
+        '200':
+          description: A list of items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+  /items/{itemId}/bids:
+    post:
+      summary: Create Bid
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                bidder:
+                  type: string
+              required:
+                - amount
+                - bidder
+      responses:
+        '201':
+          description: Bid created
+    get:
+      summary: Get Bids
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of bids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    amount:
+                      type: number
+                    bidder:
+                      type: string
+  /items/{itemId}/winner:
+    get:
+      summary: Get Item Winner
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The winning bid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  amount:
+                    type: number
+                  bidder:
+                    type: string
