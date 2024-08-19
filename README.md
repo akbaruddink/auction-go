@@ -46,3 +46,21 @@ To run this project using Docker, follow these steps:
 5. Open your web browser and visit `https://editor.swagger.io/`, copy all contents from `openapi.yml` to the editor to access the project.
 
 > Note: You might need to disable CORS on your browser for this to work. And, if you're using chrome you can try this extension - https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
+
+## Tests
+
+To generate tests for your GoLang code and obtain HTML coverage, you can follow these steps:
+
+1. Make sure you have latest version of Go installed on your machine.
+2. Open a terminal and navigate to the root directory of your Go project.
+3. Run the following command to generate tests for your code:
+```
+go test -coverprofile=coverage.out
+```
+4. After running the command, you will have a file named coverage.out in your current directory. This file contains the coverage information for your tests.
+5. To generate an HTML coverage report, run the following command:
+```
+go tool cover -html="coverage.out" -o coverage.html
+```
+6. After running the command, you will have a file named coverage.html in your current directory. This file is an HTML report that shows the coverage details of your tests.
+7. To view the HTML coverage report, open the coverage.html file in a web browser.
